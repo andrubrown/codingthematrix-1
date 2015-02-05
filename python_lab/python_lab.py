@@ -7,24 +7,24 @@ coursera = 1
 
 
 ## 1: (Task 1) Minutes in a Week
-minutes_in_week = ...
+minutes_in_week = 60*24*7
 
 
 
 ## 2: (Task 2) Remainder
-remainder_without_mod = ...
+remainder_without_mod = 2304811 - 2304811//47*47
 
 
 
 ## 3: (Task 3) Divisibility
-divisible_by_3 = ...
+divisible_by_3 = (673 + 909) % 3 == 0
 
 
 
 ## 4: (Task 4) Conditional Expression
 x = -9
 y = 1/2
-expression_val = ...
+expression_val = 2**(y+1/2) if x+10<0 else 2**(y-1/2)
 
 
 
