@@ -2,7 +2,7 @@
 coursera = 1
 # Please fill out this stencil and submit using the provided submission script.
 
-
+from random import randint
 
 
 
@@ -13,7 +13,7 @@ def movie_review(name):
     Input: the name of a movie
     Output: a string (one of the review options), selected at random using randint
     """
-    return ...
+    return ["See it!", "A gem!", "Ideological claptrap!"][randint(0, 3)]
 
 
 
@@ -32,11 +32,16 @@ def makeInverseIndex(strlist):
     >>> makeInverseIndex(['hello world','hello','hello cat','hellolot of cats']) == {'hello': {0, 1, 2}, 'cat': {2}, 'of': {3}, 'world': {0}, 'cats': {3}, 'hellolot': {3}}
     True
     """
-    pass
+    inverse = {}
+    for (i, line) in enumerate(strlist):
+        for w in line.split(): inverse.setdefault(w, set()).add(i)
+
+    return inverse 
+            
 
 
 
-## 3: (Task 3) Or Search
+## 3: (Task 3) Or  Search
 def orSearch(inverseIndex, query):
     """
     Input: an inverse index, as created by makeInverseIndex, and a list of words to query
@@ -49,9 +54,11 @@ def orSearch(inverseIndex, query):
     >>> orSearch(idx, ['Johann', 'Carl'])
     {0, 2, 3, 4, 5}
     """
-    pass
+    result = set()
+    for word in query:
+        result.update(inverseIndex[word])
 
-
+    return result
 
 ## 4: (Task 4) And Search
 def andSearch(inverseIndex, query):
@@ -66,5 +73,10 @@ def andSearch(inverseIndex, query):
     >>> andSearch(idx, ['Johann', 'Bach'])
     {0, 4}
     """
-    pass
-
+    if len(query) == 0:
+        return set()
+    result = set(inverseIndex[query[0]])
+    for word in query[1:]:
+        result.intersection_update(inverseIndex[word])
+    
+    return result
