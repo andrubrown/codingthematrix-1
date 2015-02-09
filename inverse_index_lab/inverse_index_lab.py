@@ -13,7 +13,7 @@ def movie_review(name):
     Input: the name of a movie
     Output: a string (one of the review options), selected at random using randint
     """
-    return ["See it!", "A gem!", "Ideological claptrap!"][randint(0, 3)]
+    return ["See it!", "A gem!", "Ideological claptrap!"][randint(0, 2)]
 
 
 
