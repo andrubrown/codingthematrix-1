@@ -20,8 +20,7 @@ def myFilter(L, num):
       >>> myFilter([10,15,20,25],10)
       [15, 25]
     '''
-    pass
-
+    return [l for l in L if (l % num) != 0]
 
 
 ## 2: (Problem 2) Python Comprehensions: Lists of Lists
@@ -33,7 +32,7 @@ def my_lists(L):
     >>> my_lists([0,3])
     [[], [1, 2, 3]]
     '''
-    pass
+    return [range(1, x + 1) for x in L]
 
 
 
@@ -56,7 +55,7 @@ def myFunctionComposition(f, g):
       >>> myFunctionComposition(a,b) == {'x':'twentyfour','y':'twentyfive'}
       True
     '''
-    pass
+    return {f_k:g[f_v] for f_k, f_v in f.items()}
 
 
 
@@ -74,8 +73,10 @@ Be sure your procedure works for the empty list.
       >>> mySum([3,5,10])
       18
     '''
-    pass
-
+    current = 0
+    for x in L:
+        current = current + x
+    return current
 
 
 ## 5: (Problem 5) Multiplying numbers in a list
@@ -92,7 +93,11 @@ Be sure your procedure works for the empty list.
       >>> myProduct([-3,2,4])
       -24
     '''
-    pass
+    current = 1
+    for x in L:
+        current = current * x
+    return current
+
 
 
 
@@ -111,7 +116,11 @@ Hint: The value of the Python expression float('infinity') is infinity.
     >>> myMin([0,3,5,-2,-5])
     -5
     '''
-    pass
+    current = float('infinity')
+    for x in L:
+        current = x if x < current
+    return current
+
 
 
 
@@ -129,8 +138,10 @@ Be sure your procedure works for the empty list.
     >>> myConcat(['what','is','up'])
     'whatisup'
     '''
-    pass
-
+    current = ""
+    for x in L:
+        current = current + x
+    return current
 
 
 ## 8: (Problem 8) Union of Sets in a List
@@ -147,23 +158,24 @@ Be sure your procedure works for the empty list.
     >>> myUnion([set(),{3,5},{3,5}])
     {3, 5}
     '''
-    pass
-
+    current = set()
+    for x in L:
+        current = current.union(x)
+    return current
 
 
 ## 9: (Problem 9) Complex Addition Practice
 # Each answer should be a Python expression whose value is a complex number.
 
-complex_addition_a = ...
-complex_addition_b = ...
-complex_addition_c = ...
-complex_addition_d = ...
+complex_addition_a = (3 + j) + (2 + 2j)
+complex_addition_b = (-1 + 2i) + (1 - j)
+complex_addition_c = (2 + 0j) + (-3 + 0.001j)
+complex_addition_d = 4*(0 + 2j) + (0.001 + j)
 
 
 
 ## 10: (Problem 10) Combining Complex Operations
 #Write a procedure that evaluates ax+b for all elements in L
-
 def transform(a, b, L):
     '''
     Input:
@@ -176,12 +188,11 @@ def transform(a, b, L):
     >>> transform(3,2,[1,2,3])
     [5, 8, 11]
     '''
-    pass
-
-
+    return [a*z + b for z in L]
 
 ## 11: (Problem 11) GF(2) Arithmetic
-GF2_sum_1 = ... # answer with 0 or 1
-GF2_sum_2 = ...
-GF2_sum_3 = ...
+from GF2 import one, zero
+GF2_sum_1 = one + one + one + zero
+GF2_sum_2 = one * one + zero * one + zero * zero + one * one
+GF2_sum_3 = (one + one + one) * (one + one + one + one)
 
