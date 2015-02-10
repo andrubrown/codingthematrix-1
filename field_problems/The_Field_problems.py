@@ -24,7 +24,6 @@ def myFilter(L, num):
 
 
 ## 2: (Problem 2) Python Comprehensions: Lists of Lists
-
 def my_lists(L):
     '''
     >>> my_lists([1,2,4])
@@ -32,7 +31,7 @@ def my_lists(L):
     >>> my_lists([0,3])
     [[], [1, 2, 3]]
     '''
-    return [range(1, x + 1) for x in L]
+    return [list(range(1, x + 1)) for x in L]
 
 
 
@@ -118,7 +117,8 @@ Hint: The value of the Python expression float('infinity') is infinity.
     '''
     current = float('infinity')
     for x in L:
-        current = x if x < current
+        if x < current:
+            current = x 
     return current
 
 
@@ -167,10 +167,10 @@ Be sure your procedure works for the empty list.
 ## 9: (Problem 9) Complex Addition Practice
 # Each answer should be a Python expression whose value is a complex number.
 
-complex_addition_a = (3 + j) + (2 + 2j)
-complex_addition_b = (-1 + 2i) + (1 - j)
+complex_addition_a = (3 + 1j) + (2 + 2j)
+complex_addition_b = (-1 + 2j) + (1 - 1j)
 complex_addition_c = (2 + 0j) + (-3 + 0.001j)
-complex_addition_d = 4*(0 + 2j) + (0.001 + j)
+complex_addition_d = 4*(0 + 2j) + (0.001 + 1j)
 
 
 
@@ -192,7 +192,10 @@ def transform(a, b, L):
 
 ## 11: (Problem 11) GF(2) Arithmetic
 from GF2 import one, zero
-GF2_sum_1 = one + one + one + zero
-GF2_sum_2 = one * one + zero * one + zero * zero + one * one
-GF2_sum_3 = (one + one + one) * (one + one + one + one)
+## one + one + one + zero
+GF2_sum_1 = 1
+## one * one + zero * one + zero * zero + one * one
+GF2_sum_2 = 1
+## (one + one + one) * (one + one + one + one)
+GF2_sum_3 = 0
 
