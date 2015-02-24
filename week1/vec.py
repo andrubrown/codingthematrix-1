@@ -129,7 +129,9 @@ def dot(u,v):
     12
     """
     assert u.D == v.D
-    pass
+
+    return sum([getitem(u,k)*getitem(v,k) for k in u.D])
+        
 
 def scalar_mul(v, alpha):
     """
