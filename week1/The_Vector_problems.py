@@ -42,16 +42,17 @@ p3_vector_sum_2 = [v + u + u for (v, u) in zip([0, one, one], [one, one, one])]
 # The answer should be an empty set, written set(), if the given vector u cannot
 # be written as the sum of any subset of the vectors a, b, c, d, e, and f.
 
-u_0010010 = ...
-u_0100010 = ...
+u_0010010 = {'d', 'e', 'c'}
+u_0100010 = {'d', 'e', 'c', 'b'}
 
 
 
 ## 5: (Problem 5) GF2 Vector Addition B
 # Use the same format as the previous problem
 
-v_0010010 = ...
-v_0100010 = ...
+v_0010010 = {'c','d'}
+v_0100010 = set()
+###v_0100010 = {'b', 'c' -> 0100100
 
 
 
