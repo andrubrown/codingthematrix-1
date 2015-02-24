@@ -12,26 +12,26 @@ from GF2 import one
 #Please express each answer as a list of numbers
 p1_v = [-1, 3]
 p1_u = [0, 4]
-p1_v_plus_u = [...]
-p1_v_minus_u = [...]
-p1_three_v_minus_two_u = [...]
+p1_v_plus_u = [v + u for (v, u) in zip(p1_v, p1_u)]
+p1_v_minus_u = [v - u for (v, u) in zip(p1_v, p1_u)]
+p1_three_v_minus_two_u = [(3*v - 2*u) for (v, u) in zip(p1_v, p1_u)]
 
 
 
 ## 2: (Problem 2) Vector Addition Practice 2
 p2_u = [-1,  1, 1]
 p2_v = [ 2, -1, 5]
-p2_v_plus_u = [...]
-p2_v_minus_u = [...]
-p2_two_v_minus_u = [...]
-p2_v_plus_two_u = [...]
+p2_v_plus_u = [v + u for (v, u) in zip(p2_v, p2_u)]
+p2_v_minus_u = [v - u for (v, u) in zip(p2_v, p2_u)]
+p2_two_v_minus_u = [(2*v - u) for (v, u) in zip(p2_v, p2_u)]
+p2_v_plus_two_u = [(v + 2*u) for (v, u) in zip(p2_v, p2_u)]
 
 
 
 ## 3: (Problem 3) Vector Addition Practice 3
 # Write your answer using GF2's one instead of the number 1
-p3_vector_sum_1 = [...]
-p3_vector_sum_2 = [...]
+p3_vector_sum_1 = [v + u for (v, u) in zip([0, one, one], [one, one, one])]
+p3_vector_sum_2 = [v + u + u for (v, u) in zip([0, one, one], [one, one, one])]
 
 
 
