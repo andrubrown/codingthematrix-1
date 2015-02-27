@@ -58,21 +58,23 @@ v_0100010 = set()
 
 ## 6: (Problem 6) Solving Linear Equations over GF(2)
 #You should be able to solve this without using a computer.
-x_gf2 = [...]
+x_gf2 = [0, one, one, one]
 
 
 
 ## 7: (Problem 7) Formulating Equations using Dot-Product
 #Please provide each answer as a list of numbers
-v1 = [...]
-v2 = [...]
-v3 = [...]
+v1 = [2, 3, -4, 1]
+v2 = [1, -5, 2, 0]
+v3 = [4, 1 ,-1, -1]
 
 
 
 ## 8: (Problem 8) Practice with Dot-Product
-uv_a = ...
-uv_b = ...
-uv_c = ...
-uv_d = ...
+import math
+uv_a = sum([i*j for (i,j) in zip([1,0],[5,4321])])
+uv_b = sum([i*j for (i,j) in zip([0,1],[12345, 6])])
+uv_c = sum([i*j for (i,j) in zip([-1,3],[5,7])])
+uv_d = sum([i*j for (i,j) in zip([-math.sqrt(2)/2,math.sqrt(2)/2],[math.sqrt(2)/2,-math.sqrt(2)/2])])
+
 

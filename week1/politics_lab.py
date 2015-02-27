@@ -39,8 +39,10 @@ def create_voting_dict(strlist):
     The lists for each senator should preserve the order listed in voting data.
     In case you're feeling clever, this can be done in one line.
     """
-    pass
-
+    entries = {}
+    for s in [str.split(i) for i in strlist]:
+        entries[s[0]] = [int(i) for i in s[3:]]
+    return entries
 
 
 ## 2: (Task 2.12.2) Policy Compare
@@ -61,7 +63,7 @@ def policy_compare(sen_a, sen_b, voting_dict):
         
     You should definitely try to write this in one line.
     """
-    pass
+    return sum([i*j for i,j in zip(voting_dict[sen_a], voting_dict[sen_b])])
 
 
 
@@ -80,8 +82,14 @@ def most_similar(sen, voting_dict):
 
     Note that you can (and are encouraged to) re-use you policy_compare procedure.
     """
-    
-    return ""
+    similar = ''
+    similar_score = -float("inf")
+    for other_sen in [e for e in voting_dict.keys() if e != sen]:
+        score = policy_compare(sen, other_sen, voting_dict)
+        if score > similar_score:
+            similar = other_sen
+            similar_score = score
+    return similar
 
 
 
@@ -97,14 +105,28 @@ def least_similar(sen, voting_dict):
         >>> least_similar('a', vd)
         'c'
     """
-    pass
+    similar = ''
+    similar_score = float("inf")
+    for other_sen in [e for e in voting_dict.keys() if e != sen]:
+        score = policy_compare(sen, other_sen, voting_dict)
+        if score < similar_score:
+            similar = other_sen
+            similar_score = score
+    return similar
 
 
 
 ## 5: (Task 2.12.5) Chafee, Santorum
-most_like_chafee    = ''
-least_like_santorum = '' 
+voting_dict = create_voting_dict(list(open('voting_record_dump109.txt')))
+most_like_chafee    = most_similar("Chafee", voting_dict)
+least_like_santorum = least_similar("Santorum", voting_dict)
 
+## Ungraded task
+senators_by_states = {}
+for entries in [str.split(s) for s in list(open('voting_record_dump109.txt'))]:
+    senators_by_states.setdefault(entries[2], []).append(entries[0])
+senators_for_TX = senators_by_states['TX'];
+favorite_state_senator_similarity = policy_compare(senators_for_TX[0], senators_for_TX[1], voting_dict)
 
 
 ## 6: (Task 2.12.7) Most Average Democrat
@@ -117,9 +139,15 @@ def find_average_similarity(sen, sen_set, voting_dict):
         >>> find_average_similarity('Klein', {'Fox-Epstein','Ravella'}, vd)
         -0.5
     """
-    return ...
+    return sum([policy_compare(sen, other_sen, voting_dict) for other_sen in sen_set])/len(sen_set)
 
-most_average_Democrat = ... # give the last name (or code that computes the last name)
+## gather senators by party
+senators_by_party = {}
+for entries in [str.split(s) for s in list(open('voting_record_dump109.txt'))]:
+    senators_by_party.setdefault(entries[1], []).append(entries[0])
+democrats = senators_by_party['D']
+
+most_average_Democrat = max(voting_dict.keys(), key=lambda d:find_average_similarity(d, democrats, voting_dict)) # give the last name (or code that computes the last name)
 
 
 
@@ -141,9 +169,12 @@ def find_average_record(sen_set, voting_dict):
         >>> find_average_record({'a'}, d)
         [0.0, 1.0, 1.0]
     """
-    return ...
+    return [float(sum(x))/len(x) for x in zip(*[voting_dict[k] for k in sen_set])]
 
-average_Democrat_record = ... # give the vector as a list
+#voting_dict = {'Klein': [-1,0,1], 'Fox-Epstein': [-1,-1,-1], 'Ravella': [0,0,1]}
+#find_average_record({'Fox-Epstein','Ravella'}, voting_dict)
+
+average_Democrat_record = find_average_record(democrats, voting_dict)
 
 
 
@@ -160,5 +191,21 @@ def bitter_rivals(voting_dict):
         >>> br == ('Fox-Epstein', 'Ravella') or br == ('Ravella', 'Fox-Epstein')
         True
     """
-    return (..., ...)
+    lhs_worse = None
+    rhs_worse = None
+    value = float('inf')
+    for i, sen_a in enumerate(voting_dict.keys()):
+        for j, sen_b in enumerate(voting_dict.keys()):
+            if i < j:
+                v = policy_compare(sen_a, sen_b, voting_dict)
+                if v < value:
+                    lhs_worse = sen_a
+                    rhs_worse = sen_b
+                    value = v
 
+    return (lhs_worse, rhs_worse)
+            
+
+# voting_dict = {'Klein': [-1,0,1], 'Fox-Epstein': [-1,-1,-1], 'Ravella': [0,0,1]}
+# br = bitter_rivals(voting_dict)
+# br == ('Fox-Epstein', 'Ravella') or br == ('Ravella', 'Fox-Epstein')
