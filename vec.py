@@ -62,10 +62,7 @@ def equal(u,v):
 
     """
     assert u.D == v.D
-    for k in u.D:
-        if getitem(u, k) != getitem(v, k):
-            return False
-    return True
+    return all([getitem(u, k) != getitem(v, k) for k in u.d])
 
 def add(u,v):
     """
@@ -98,7 +95,9 @@ def add(u,v):
         if val != 0:
             setitem(res, k, val)
 
+    #{k:u1 + v1 for (k, u1, u2) in  [(k, getitem(u, k), getitem(v, k)) for k in u.D] if u1 + v1 != 0}
     return res
+
 
 def dot(u,v):
     """
