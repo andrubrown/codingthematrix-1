@@ -3,7 +3,7 @@ coursera = 1
 # Please fill out this stencil and submit using the provided submission script.
  
 from vec import Vec
-
+import doctest
 
 ## 1: (Problem 3.8.1) Vector Comprehension and Sum
 def vec_select(veclist, k):
@@ -30,7 +30,13 @@ def vec_sum(veclist, D):
     >>> vec_sum([v1, v2, v3, v4], D) == Vec(D, {'b': 13, 'a': 11})
     True
     '''
-    pass
+    return sum(veclist, Vec(D, {})
+    # s = Vec(D, {})
+    # for k in D:
+    #     s[k] = sum([v[k] for v in veclist])
+    # return s
+
+doctest.run_docstring_examples(vec_sum, globals())
 
 def vec_select_sum(veclist, k, D):
     '''
