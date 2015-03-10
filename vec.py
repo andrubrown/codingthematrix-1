@@ -62,7 +62,11 @@ def equal(u,v):
 
     """
     assert u.D == v.D
-    return all([getitem(u, k) != getitem(v, k) for k in u.d])
+    #return all([getitem(u, k) != getitem(v, k) for k in u.D])
+    for k in u.D:
+        if getitem(u, k) != getitem(v, k):
+            return False
+    return True
 
 def add(u,v):
     """
