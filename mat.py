@@ -13,7 +13,7 @@ def getitem(M, k):
     0
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-    pass
+    return M.f.get(k,0)
 
 def setitem(M, k, val):
     """
@@ -33,7 +33,7 @@ def setitem(M, k, val):
     True
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-    pass
+    M.f[k] = val
 
 def add(A, B):
     """
@@ -57,7 +57,7 @@ def add(A, B):
     True
     """
     assert A.D == B.D
-    pass
+    return Mat(A.D, {k:A[k] + B[k] for k in set(A.f.keys()).union(set(B.f.keys()))})
 
 def scalar_mul(M, x):
     """
@@ -71,7 +71,7 @@ def scalar_mul(M, x):
     >>> 0.25*M == Mat(({1,3,5}, {2,4}), {(1,2):1.0, (5,4):0.5, (3,4):0.75})
     True
     """
-    pass
+    return Mat(M.D, {k:x*v for k,v in M.f.items()})
 
 def equal(A, B):
     """
@@ -90,7 +90,7 @@ def equal(A, B):
     True
     """
     assert A.D == B.D
-    pass
+    return all([A[k] == B[k] for k in set(A.f.keys()).union(set(B.f.keys()))])
 
 def transpose(M):
     """
@@ -104,7 +104,7 @@ def transpose(M):
     >>> M.transpose() == Mt
     True
     """
-    pass
+    return Mat((M.D[1], M.D[0]), {(j,i):v for ((i,j),v) in M.f.items()})
 
 def vector_matrix_mul(v, M):
     """
