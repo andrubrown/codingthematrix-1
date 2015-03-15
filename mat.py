@@ -1,3 +1,4 @@
+# version code 542eddf1f327+
 coursera = 1
 # Copyright 2013 Philip N. Klein
 from vec import Vec
