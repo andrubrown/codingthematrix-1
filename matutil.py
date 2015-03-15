@@ -1,7 +1,4 @@
 # Copyright 2013 Philip N. Klein
-from vec import Vec
-from mat import Mat
-
 def efficient_rowdict2mat(rowdict):
     col_labels = value(rowdict).D
     M = Mat((set(keys(rowdict)), col_labels), {})
@@ -116,3 +113,7 @@ def listlist2mat(L):
 
 def submatrix(M, rows, cols):
     return Mat((M.D[0]&rows, M.D[1]&cols), {(r,c):val for (r,c),val in M.f.items() if r in rows and c in cols})
+
+from vec import Vec
+from mat import Mat
+

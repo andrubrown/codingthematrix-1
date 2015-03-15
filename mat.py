@@ -1,3 +1,4 @@
+coursera = 1
 # Copyright 2013 Philip N. Klein
 from vec import Vec
 
@@ -124,7 +125,11 @@ def vector_matrix_mul(v, M):
     True
     """
     assert M.D[0] == v.D
-    pass
+    result = {k:0 for k in M.D[1]}
+    for (i,j), value in M.f.items():
+        result[j] += v[i]*value
+
+    return sum([v[k]*row for k,row in matutil.mat2rowdict(M).items()])
 
 def matrix_vector_mul(M, v):
     """
@@ -143,7 +148,14 @@ def matrix_vector_mul(M, v):
     True
     """
     assert M.D[1] == v.D
-    pass
+    value = {k:0 for k in M.D[0]}
+
+    for (i,j),k in M.f.items():
+        value[i] += v[j]*k
+ 
+    return Vec(M.D[0], value)
+    
+
 
 def matrix_matrix_mul(A, B):
     """
@@ -169,7 +181,8 @@ def matrix_matrix_mul(A, B):
     True
     """
     assert A.D[1] == B.D[0]
-    pass
+    return matutil.coldict2mat({c:A*v for c,v in matutil.mat2coldict(B).items()})
+
 
 ################################################################################
 
@@ -238,3 +251,5 @@ class Mat:
 
     def __iter__(self):
         raise TypeError('%r object is not iterable' % self.__class__.__name__)
+
+import matutil

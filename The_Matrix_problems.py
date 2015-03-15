@@ -4,14 +4,15 @@ coursera = 1
 
 from mat import Mat
 from vec import Vec
+from solver import solve
 
-
+import matutil
 
 ## 1: (Problem 1) Computing matrix-vector products
 # Please represent your solution vectors as lists.
-vector_matrix_product_1 = ...
-vector_matrix_product_2 = ...
-vector_matrix_product_3 = ...
+vector_matrix_product_1 = [1, 0]
+vector_matrix_product_2 = [0, 4.44]
+vector_matrix_product_3 = [14, 20, 26]
 
 
 
@@ -19,17 +20,17 @@ vector_matrix_product_3 = ...
 # Represent your solution as a list of rowlists.
 # For example, the 2x2 identity matrix would be [[1,0],[0,1]].
 
-M_swap_two_vector = ...
+M_swap_two_vector = [[0, 1], [1, 0]]
 
 
 
 ## 3: (Problem 3) [z+x, y, x] Matrix-vector multiplication
-three_by_three_matrix = ... # Represent with a list of rowlists.
+three_by_three_matrix = [[1, 0, 1], [0, 1, 0], [1, 0, 0]]
 
 
 
 ## 4: (Problem 4) [2x, 4y, 3z] matrix-vector multiplication
-multiplied_matrix = ... # Represent with a list of row lists.
+multiplied_matrix = [[2, 0, 0], [0, 4, 0], [0, 0, 3]]
 
 
 
@@ -37,95 +38,144 @@ multiplied_matrix = ... # Represent with a list of row lists.
 # Please enter a boolean representing if the multiplication is valid.
 # If it is not valid, please enter None for the dimensions.
 
-part_1_valid = ... # True or False
-part_1_number_rows = ... # Integer or None
-part_1_number_cols = ... # Integer or None
+part_1_valid = False
+part_1_number_rows = None
+part_1_number_cols = None
 
-part_2_valid = ...
-part_2_number_rows = ...
-part_2_number_cols = ...
+part_2_valid = False
+part_2_number_rows = None
+part_2_number_cols = None
 
-part_3_valid = ...
-part_3_number_rows = ...
-part_3_number_cols = ...
+part_3_valid = True
+part_3_number_rows = 1
+part_3_number_cols = 2
 
-part_4_valid = ...
-part_4_number_rows = ...
-part_4_number_cols = ...
+part_4_valid = True
+part_4_number_rows = 2
+part_4_number_cols = 1
 
-part_5_valid = ...
-part_5_number_rows = ...
-part_5_number_cols = ...
+part_5_valid = False
+part_5_number_rows = None
+part_5_number_cols = None
 
-part_6_valid = ...
-part_6_number_rows = ...
-part_6_number_cols = ...
+part_6_valid = True
+part_6_number_rows = 1
+part_6_number_cols = 1
 
-part_7_valid = ...
-part_7_number_rows = ...
-part_7_number_cols = ...
+part_7_valid = True
+part_7_number_rows = 3
+part_7_number_cols = 3
 
 
 
 ## 6: (Problem 6) Matrix-matrix multiplication practice with small matrices
 # Please represent your answer as a list of row lists.
 # Example: [[1,1],[2,2]]
-small_mat_mult_1 = ...
-small_mat_mult_2 = ...
-small_mat_mult_3 = ...
-small_mat_mult_4 = ...
-small_mat_mult_5 = ...
-small_mat_mult_6 = ...
-
+small_mat_mult_1 = [[8, 13],
+                    [8, 14]]
+                 
+small_mat_mult_2 = [[24, 11, 4],
+                    [1, 3, 0]]
+small_mat_mult_3 = [[3, 13]]
+small_mat_mult_4 = [[14]]
+small_mat_mult_5 = [[1, 2, 3],
+                    [2, 4, 6],
+                    [3, 6, 9]]
+small_mat_mult_6 =  [[-2, 4],
+                     [1, 1],
+                     [1, -3]]
 
 
 ## 7: (Problem 7) Matrix-matrix multiplication practice with a permutation matrix
 # Please represent your solution as a list of row lists.
 
-part_1_AB = ...
-part_1_BA = ...
+part_1_AB = [[5, 2, 0, 1], 
+             [2, 1, -4, 6], 
+             [2, 3, 0, -4], 
+             [-2, 3, 4, 0]]
+part_1_BA = [[1, -4, 6, 2], [3, 0, -4, 2], [3, 4, 0, -2], [2, 0, 1, 5]]
 
-part_2_AB = ...
-part_2_BA = ...
+part_2_AB = [[5, 1, 0, 2], 
+             [2, 6, -4, 1], 
+             [2, -4, 0, 3], 
+             [-2, 0, 4, 3]]
+part_2_BA = [[3,4,0,-2], [3,0,-4,2], [1,-4,6,2], [2,0,1,5]]
 
-part_3_AB = ...
-part_3_BA = ...
+part_3_AB = [[1, 0, 5, 2], [6, -4, 2, 1], [-4, 0, 2, 3], [0, 4, -2, 3]]
+part_3_BA = [[3,4,0,-2], [1,-4,6,2], [2,0,1,5], [3,0,-4,2]]
 
 
 
 ## 8: (Problem 8) Matrix-matrix multiplication practice with very sparse matrices
 # Please represent your answer as a list of row lists.
 
-your_answer_a_AB = ...
-your_answer_a_BA = ...
+your_answer_a_AB = [[0, 0, 2, 0],
+                    [0, 0, 5, 0],
+                    [0, 0, 4, 0],
+                    [0, 0, 6, 0]]
+your_answer_a_BA = [[0, 0, 0, 0],
+                    [4, 4, 4, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]]
+                    
+your_answer_b_AB = [[0, 2, -1, 0],
+                    [0, 5, 3, 0],
+                    [0, 4, 0, 0],
+                    [0, 6, -5, 0]]
 
-your_answer_b_AB = ...
-your_answer_b_BA = ...
+your_answer_b_BA = [[0, 0, 0, 0],
+                    [1, 5, -2, 3],
+                    [0, 0, 0, 0],
+                    [4, 4, 4, 0]]
 
-your_answer_c_AB = ...
-your_answer_c_BA = ...
+your_answer_c_AB = [[6, 0, 0, 0],
+                    [6, 0, 0, 0],
+                    [8, 0, 0, 0],
+                    [5, 0, 0, 0]]
+your_answer_c_BA = [[4, 2, 1, -1],
+                    [4, 2, 1, -1],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]]
 
-your_answer_d_AB = ...
-your_answer_d_BA = ...
+your_answer_d_AB = [[0, 3, 0, 4],
+                    [0, 4, 0, 1],
+                    [0, 4, 0, 4],
+                    [0, -6, 0, -1]]
+your_answer_d_BA = [[0, 11, 0, -2],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [1, 5, -2, 3]]
 
-your_answer_e_AB = ...
-your_answer_e_BA = ...
+your_answer_e_AB = [[0, 3, 0, 8],
+                    [0, -9, 0, 2],
+                    [0, 0, 0, 8],
+                    [0, 15, 0, -2]]
+your_answer_e_BA = [[-2, 12, 4, -10],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [-3, -15, 6, -9]]
 
-your_answer_f_AB = ...
-your_answer_f_BA = ...
+your_answer_f_AB = [[-4, 4, 2, -3],
+                    [-1, 10, -4, 9],
+                    [-4, 8, 8, 0],
+                    [1, 12, 4, -15]]
+your_answer_f_BA = [[-4, -2, -1, 1],
+                    [2, 10, -4, 6],
+                    [8, 8, 8, 0],
+                    [-3, 18, 6, -15]]
 
 
 
 ## 9: (Problem 9) Column-vector and row-vector matrix multiplication
-column_row_vector_multiplication1 = Vec({0, 1}, {...})
+column_row_vector_multiplication1 = Vec({0, 1}, {0:13, 1:20}) 
 
-column_row_vector_multiplication2 = Vec({0, 1, 2}, {...})
+column_row_vector_multiplication2 = Vec({0, 1, 2}, {0:24, 1:11, 2:4})
 
-column_row_vector_multiplication3 = Vec({0, 1, 2, 3}, {...})
+column_row_vector_multiplication3 = Vec({0, 1, 2, 3}, {0:4, 1:8, 2:11, 3:3})
 
-column_row_vector_multiplication4 = Vec({0,1}, {...})
+column_row_vector_multiplication4 = Vec({0,1}, {0:30, 1:16})
 
-column_row_vector_multiplication5 = Vec({0, 1, 2}, {...})
+column_row_vector_multiplication5 = Vec({0, 1, 2}, {0:-3, 1:1, 2:9})
 
 
 
@@ -150,9 +200,10 @@ def lin_comb_mat_vec_mult(M, v):
     >>> lin_comb_mat_vec_mult(M1,v1) == Vec({'a', 'b'},{'a': 38, 'b': -5})
     True
     '''
+    
     assert(M.D[1] == v.D)
-    pass
 
+    return sum([v[k]*col for k, col in matutil.mat2coldict(M).items()])
 
 
 ## 11: (Problem 11) Linear-combinations vector-matrix multiply
@@ -176,7 +227,7 @@ def lin_comb_vec_mat_mult(v, M):
       True
     '''
     assert(v.D == M.D[0])
-    pass
+    return sum([v[k]*row for k,row in matutil.mat2rowdict(M).items()])
 
 
 
@@ -199,7 +250,7 @@ def dot_product_mat_vec_mult(M, v):
     True
     '''
     assert(M.D[1] == v.D)
-    pass
+    return Vec(M.D[0], {k:v*u for k, u in matutil.mat2rowdict(M).items()})
 
 
 
@@ -221,7 +272,7 @@ def dot_product_vec_mat_mult(v, M):
       True
       '''
     assert(v.D == M.D[0])
-    pass
+    return Vec(M.D[1], {c:v*u for c,u in matutil.mat2coldict(M).items()})
 
 
 
@@ -229,14 +280,14 @@ def dot_product_vec_mat_mult(v, M):
 # You are also allowed to use the matutil module
 def Mv_mat_mat_mult(A, B):
     assert A.D[1] == B.D[0]
-    pass
+    return matutil.coldict2mat({c:A*v for c,v in matutil.mat2coldict(B).items()})
 
 
 
 ## 15: (Problem 15) Vector-matrix matrix-matrix multiply
 def vM_mat_mat_mult(A, B):
     assert A.D[1] == B.D[0]
-    pass
+    return matutil.rowdict2mat({r:v*B for r,v in matutil.mat2rowdict(A).items()})
 
 
 
@@ -257,49 +308,48 @@ def button_vectors(n):
 
 b1=Vec(D(9),{(7, 8):one,(7, 7):one,(6, 2):one,(3, 7):one,(2, 5):one,(8, 5):one,(1, 2):one,(7, 2):one,(6, 3):one,(0, 4):one,(2, 2):one,(5, 0):one,(6, 4):one,(0, 0):one,(5, 4):one,(1, 4):one,(8, 7):one,(0, 8):one,(6, 5):one,(2, 7):one,(8, 3):one,(7, 0):one,(4, 6):one,(6, 8):one,(0, 6):one,(1, 8):one,(7, 4):one,(2, 4):one})
 
-
 #Solution given by solver.
-x1 = ...
+BV = matutil.coldict2mat(button_vectors(9))
+
+x1 = solve(BV, b1)
 
 #residual
-r1 = ...
+r1 = b1 - BV*x1
 
 #Is x1 really a solution? Assign True if yes, False if no.
-is_good1 = ...
+is_good1 = True
 
 ## PART 2
 
 b2=Vec(D(9), {(3,4):one, (6,7):one})
 
 #Solution given by solver
-x2 = ...
+x2 = solve(BV, b2)
 
 #residual
-r2 = ...
+r2 = b2 - BV*x2
 
 #Is it really a solution? Assign True if yes, False if no.
-is_good2 = ...
-
+is_good2 = True
 
 
 
 ## 17: (Problem 17) Solving 2x2 linear systems and finding matrix inverse
-solving_systems_x1 = ...
-solving_systems_x2 = ...
-solving_systems_y1 = ...
-solving_systems_y2 = ...
-solving_systems_m = Mat(({0, 1}, {0, 1}), {...})
-solving_systems_a = Mat(({0, 1}, {0, 1}), {...})
-solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {...})
-solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {...})
-
+solving_systems_x1 = -1/5
+solving_systems_x2 = 2/5
+solving_systems_y1 = 4/5
+solving_systems_y2 = -3/5
+solving_systems_m = Mat(({0, 1}, {0, 1}), {(0,0): -1/5, (1,0): -2/5, (1,0): 4/5, (1,1):-3/5})
+solving_systems_a = Mat(({0, 1}, {0, 1}), {None})
+solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {(0,0):1, (1,1):1})
+solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {(0,0):1, (1,1):1})
 
 
 ## 18: (Problem 18) Matrix inverse criterion
 # Please write your solutions as booleans (True or False)
 
-are_inverses1 = ...
-are_inverses2 = ...
-are_inverses3 = ...
-are_inverses4 = ...
+are_inverses1 = True
+are_inverses2 = True
+are_inverses3 = False
+are_inverses4 = False
 
