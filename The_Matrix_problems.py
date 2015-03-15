@@ -330,7 +330,7 @@ x2 = solve(BV, b2)
 r2 = b2 - BV*x2
 
 #Is it really a solution? Assign True if yes, False if no.
-is_good2 = True
+is_good2 = False
 
 
 
@@ -339,8 +339,8 @@ solving_systems_x1 = -1/5
 solving_systems_x2 = 2/5
 solving_systems_y1 = 4/5
 solving_systems_y2 = -3/5
-solving_systems_m = Mat(({0, 1}, {0, 1}), {(0,0): -1/5, (1,0): -2/5, (1,0): 4/5, (1,1):-3/5})
-solving_systems_a = Mat(({0, 1}, {0, 1}), {None})
+solving_systems_m = Mat(({0, 1}, {0, 1}), {(0,0):-1/5, (0,1):4/5, (1,0):2/5, (1,1):-3/5})
+solving_systems_a = Mat(({0, 1}, {0, 1}), {(0,0):3, (1,0):2, (0,1):4, (1,1):1})
 solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {(0,0):1, (1,1):1})
 solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {(0,0):1, (1,1):1})
 
